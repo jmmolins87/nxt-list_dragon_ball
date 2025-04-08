@@ -6,12 +6,31 @@ import React from 'react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
+import { Metadata } from 'next';
 
 import { getCharacterById } from '@/services/characters.service';
 import { Header } from '@/components/Header'
-
 interface ICharacterPageProps {
     params: Promise<{ id: string }>
+}
+
+
+// Simular petición del lado del navegador, no hace falta realizar petidicones al servidor
+export async function generateStaticParams() {
+
+    return [
+        { id: "1" },
+        { id: "2" },
+        { id: "3" }
+    ]
+}
+
+// Generamos la metadata de la página dinámicamente
+export async function generateMetadata({ params }: ICharacterPageProps):Promise<Metadata> {
+
+    const { id } = await params;
+    const character = await getCharacterById(id)
+    return { title: character.name }
 }
 
 
@@ -35,6 +54,7 @@ export default async function CharacterPage({ params }: ICharacterPageProps) {
                         title={character.name}
                         width={500}
                         height={500}
+                        priority
                         className="h-60 object-contain mx-auto" />
                     <div className="max-w-1/2">
                         <h1 className="text-green-500 text-3xl font-bold">{character.name}

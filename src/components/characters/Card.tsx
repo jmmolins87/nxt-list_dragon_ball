@@ -24,8 +24,9 @@ export const Card = ({ character }: ICharacterCardProp ) => {
             src={ character.image }
             alt={ character.name }
             title={ character.name }
-            width={100}
-            height={100}
+            width={500}
+            height={500}
+            priority
             className="h-56 w-56 object-contain mx-auto rounded-lg mb-3 transition-transform duration-300 group-hover:scale-125"
             />
         <h3 className="text-2xl font-bold">{character.name}</h3>
