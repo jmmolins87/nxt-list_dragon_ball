@@ -11,7 +11,7 @@ import { getCharacterById } from '@/services/characters.service';
 import { Header } from '@/components/Header'
 
 interface ICharacterPageProps {
-    params: { id: string }
+    params: Promise<{ id: string }>
 }
 
 
